@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jamesnet.Wpf" Version="1.0.0.33" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DirectLink.Forms\DirectLink.Forms.csproj" />
+    <ProjectReference Include="..\DirectLink.Main\DirectLink.Main.csproj" />
+  </ItemGroup>
+
+</Project>
