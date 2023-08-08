@@ -4,6 +4,7 @@
     xmlns:controls="clr-namespace:Jamesnet.Wpf.Controls;assembly=Jamesnet.Wpf"
     xmlns:converters="clr-namespace:DirectLink.Main.Local.Converters"
     xmlns:units="clr-namespace:DirectLink.Main.UI.Units">
+
     <converters:ItemsNullConverters x:Key="ItemsNullConverters" />
     <Style x:Key="ItemsNull" TargetType="{x:Type ContentControl}">
         <Setter Property="Template">
@@ -23,12 +24,13 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="SelectionMode" Value="Extended" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type units:DropListBox}">
                     <Border Background="Transparent">
                         <Grid>
-                            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
                                 <ItemsPresenter />
                             </ScrollViewer>
                             <ContentControl
@@ -41,32 +43,15 @@
                         <DataTrigger Binding="{Binding ItemsSource.Count, Converter={StaticResource ItemsNullConverters}, RelativeSource={RelativeSource Self}}" Value="true">
                             <Setter TargetName="EmptyFiles" Property="Visibility" Value="Visible" />
                         </DataTrigger>
-                        <!--<DataTrigger Binding="{Binding IconType}" Value="Folder">
-                            <Setter TargetName="icon" Property="Fill" Value="#FFEFB13A" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconType}" Value="FileImage">
-                            <Setter TargetName="icon" Property="Fill" Value="#FFFE9C84" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconType}" Value="FileZip">
-                            <Setter TargetName="icon" Property="Fill" Value="#FFFED484" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconType}" Value="FileCheck">
-                            <Setter TargetName="icon" Property="Fill" Value="#FF44A7FF" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconType}" Value="FilePDF">
-                            <Setter TargetName="icon" Property="Fill" Value="#FFF85E7C" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IconType}" Value="FileWord">
-                            <Setter TargetName="icon" Property="Fill" Value="#FF16E2FF" />
-                            <Setter Property="Background" Value="Transparent" />
-                        </DataTrigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel />
+                </ItemsPanelTemplate>
             </Setter.Value>
         </Setter>
     </Style>

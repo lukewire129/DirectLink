@@ -1,9 +1,14 @@
 ﻿using DirectLink.Main.Local.Model;
 using System.Collections;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Drawing;
 
 namespace DirectLink.Main.UI.Units
 {
@@ -24,6 +29,11 @@ namespace DirectLink.Main.UI.Units
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DropListBox), new FrameworkPropertyMetadata(typeof(DropListBox)));
         }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new DropListBoxItem ();
+        }
         public DropListBox()
         {
             AllowDrop = true;
@@ -36,9 +46,26 @@ namespace DirectLink.Main.UI.Units
         private void DropBox_Drop(object sender, DragEventArgs e)
         {
             string[] data = (string[])e.Data.GetData (DataFormats.FileDrop);
+
+            ImageSource imageSource = null;
+            try
+            {
+                Icon programIcon = Icon.ExtractAssociatedIcon (data[0]); // 아이콘 추출
+                imageSource = Imaging.CreateBitmapSourceFromHIcon (
+                   programIcon.Handle,
+                   new Int32Rect (0, 0, programIcon.Width, programIcon.Height),
+                   BitmapSizeOptions.FromEmptyOptions ());
+            }
+            catch
+            {
+
+            }
+
             DropFileCommand?.Execute (new DropFileModel ()
             {
-                FileName = data[0]
+                FileName = Path.GetFileName(data[0]),
+                FileFullName = data[0],
+                FileIcon = imageSource,
             });
         }
 

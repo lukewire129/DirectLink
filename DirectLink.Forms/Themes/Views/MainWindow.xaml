@@ -129,6 +129,13 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <units:DraggableBar x:Name="PART_DragBar" Style="{StaticResource BAR.DRAGGABLE}" />
+                            <Border Padding="10" IsHitTestVisible="False">
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Foreground="White"
+                                    Text="DirectLink" />
+                            </Border>
                             <Button Grid.Column="1" Style="{StaticResource BTN.MIN}" />
                             <Button Grid.Column="2" Style="{StaticResource BTN.MAX}" />
                             <Button
