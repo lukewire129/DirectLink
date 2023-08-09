@@ -47,7 +47,7 @@ namespace DirectLink.Main.UI.Units
         {
             string[] data = (string[])e.Data.GetData (DataFormats.FileDrop);
 
-            ImageSource imageSource = null;
+            BitmapSource imageSource = null;
             try
             {
                 Icon programIcon = Icon.ExtractAssociatedIcon (data[0]); // 아이콘 추출

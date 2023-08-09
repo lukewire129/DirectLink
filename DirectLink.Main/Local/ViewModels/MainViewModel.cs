@@ -1,17 +1,14 @@
-﻿using DirectLink.Main.Local.Model;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Jamesnet.Wpf.Mvvm;
-using System.Collections.ObjectModel;
-using Jamesnet.Wpf.Controls;
-using System.IO;
-using Newtonsoft.Json;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.Text;
-using System;
-using System.Linq;
 using DirectLink.Core.Utility;
+using DirectLink.Main.Local.Extentions;
+using DirectLink.Main.Local.Model;
+using Jamesnet.Wpf.Controls;
+using Jamesnet.Wpf.Mvvm;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace DirectLink.Main.Local.ViewModels
 {
@@ -31,8 +28,8 @@ namespace DirectLink.Main.Local.ViewModels
             using (StreamReader sw = File.OpenText ("data.txt"))
             {
                 string data = sw.ReadToEnd ();
-                var objs = Base64String.Get<DropFileModel>(data);
-                this.DropFiles = new ObservableCollection<DropFileModel> (objs);
+                var objs = Base64String.Get<DropFileBaseModel> (data);
+                this.DropFiles = new ObservableCollection<DropFileModel> (objs.Change());
             }
         }
 
@@ -40,10 +37,10 @@ namespace DirectLink.Main.Local.ViewModels
         private void DropFile(DropFileModel dropFile)
         {
             this.DropFiles.Add (dropFile);
-            Save (this.DropFiles.ToList ());
+            Save (this.DropFiles.ToList ().Change());
         }
 
-        private void Save(List<DropFileModel> objs)
+        private void Save(List<DropFileBaseModel> objs)
         {
             string base64 = Base64String.Get (objs);
             using (StreamWriter sw = File.CreateText ("data.txt"))
