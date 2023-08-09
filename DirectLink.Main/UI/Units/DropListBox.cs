@@ -58,7 +58,7 @@ namespace DirectLink.Main.UI.Units
             }
             catch
             {
-
+                return;
             }
 
             DropFileCommand?.Execute (new DropFileModel ()

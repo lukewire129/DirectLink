@@ -8,5 +8,5 @@ public class DropFileModel
     public string FileName { get; set; }
     public string FileFullName { get; set; }
     [JsonProperty (NullValueHandling = NullValueHandling.Ignore)]
-    public ImageSource FileIcon { get; set; } = null;
+    public ImageSource FileIcon { get; set; }
 }
